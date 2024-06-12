@@ -1,8 +1,35 @@
 #include <iostream>
+#include <list>
+#include <stdexcept>
 
 using namespace std;
 
+char acessIndex(const list<char>& lista, size_t index) {
+    if (index >= lista.size()) {
+        throw out_of_range("Index Out Of Range");
+    }
+    
+    auto it = lista.begin();
+    advance(it, index);
+    return *it;
+}
+
+void moveElement(list<char>& characterList, size_t originPos, size_t destinyPos) {
+    if (originPos >= characterList.size() || destinyPos >= characterList.size()) {
+        throw out_of_range("Position Out Of Range");
+    }
+
+    auto itOrigin = characterList.begin();
+    advance(itOrigin, originPos);
+
+    auto itDestiny = characterList.begin();
+    advance(itDestiny, destinyPos);
+
+    characterList.splice(itDestiny, characterList, itOrigin);
+}
+
 int main() {
+	setlocale(LC_ALL, "pt_BR.UTF-8");
 	cout << "   ███▓▓▓▓╬╬╬╬╬╬▓██╬╬╬╬╬╬▓▓╬╬╬╬╬╬╬╬╬╬╬╬╬╬▓█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████" << endl;
 	cout << "\t ████▓▓▓╬╬╬╬╬╬╬▓█▓╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬▓█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████" << endl;
 	cout << "\t ███▓█▓███████▓▓███▓╬╬╬╬╬╬▓███████▓╬╬╬╬▓█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████" << endl;
@@ -24,5 +51,5 @@ int main() {
 	cout << "\t ██████████████▓▓▓███▓▓╬╬╬╬╬╬╬╬██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████" << endl; 
 	cout << "\t ███████████████▓▓▓██▓▓╬╬╬╬╬╬▓███████████by yPickles & lulzsec███████████████████████████████████████████████████████████████████████████████████████████████████" << endl;
 
-
-}   
+	return 0;
+}
